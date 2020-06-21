@@ -17,12 +17,17 @@ void Player::Update()
     if (inputmanager.keyBuffer[VK_DOWN] == 1)
         playerY += 1;
 
+    if (inputmanager.prevKeyBuffer['Z'] == 0 &&
+        inputmanager.keyBuffer['Z'] == 1){
+        gamesystem.PrintPlayerBullet(playerX+5, playerY - 5);
+    }
 
     //화면 바깥으로 나가지 말어라...
     if (playerX < 0) playerX = 0;
     if (playerX > WINDOW_WIDTH) playerX = WINDOW_WIDTH; if (playerX < 0) playerX = 0;
     if (playerY < 0) playerY = 0;
     if (playerY > WINDOW_HEIGHT) playerY = WINDOW_HEIGHT;
+
 
 }
 void Player::Render()

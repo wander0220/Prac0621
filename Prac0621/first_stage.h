@@ -14,4 +14,7 @@ public:
 	Player player;
 	Background background;
 
+	//ID3DXFont* font;
+	//int i;
+
 };

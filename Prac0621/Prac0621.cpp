@@ -22,6 +22,7 @@ LPDIRECT3DDEVICE9       g_pd3dDevice ;
 TextureManager texturemanager;
 InputManager inputmanager;
 StageManager stagemanager;
+GameSystem gamesystem;
 
 bool GameEnd = true;
 
@@ -61,6 +62,8 @@ HRESULT InitD3D(HWND hWnd)
 }
 void InitMyStuff() {
     texturemanager.LoadTexture(L"player/player1.png", PLAYER_BODY);
+    texturemanager.LoadTexture(L"player/player_bullet_1.png", PLAYER_BULLET);
+
     texturemanager.LoadTexture(L"backgrounds/background.png", GAME_BACKGROUND);
 
     texturemanager.LoadTexture(L"backgrounds/title.png", TITLE_SCREEN);
