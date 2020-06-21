@@ -22,6 +22,8 @@ LPDIRECT3DDEVICE9       g_pd3dDevice ;
 TextureManager texturemanager;
 InputManager inputmanager;
 
+Player player;
+
 HRESULT InitD3D(HWND hWnd)
 {
     if (NULL == (g_pD3D = Direct3DCreate9(D3D_SDK_VERSION)))
@@ -54,7 +56,7 @@ HRESULT InitD3D(HWND hWnd)
     return S_OK;
 }
 void InitMyStuff() {
-    texturemanager.LoadTexture(L"player/player1.png", 200);
+    texturemanager.LoadTexture(L"player/player1.png", PLAYER_BODY);
 }
 
 void EngineUpdate() {
@@ -69,7 +71,7 @@ VOID EngineRender()
 
     if (SUCCEEDED(g_pd3dDevice->BeginScene()))
     {
-        TextureElements* newElement = texturemanager.GetTexture(200);
+        /*TextureElements* newElement = texturemanager.GetTexture(PLAYER_BODY);
         newElement->g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
         RECT rect;
@@ -79,7 +81,9 @@ VOID EngineRender()
         rect.bottom = 64;
 
         newElement->g_pTextSprite->Draw(newElement->g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
-        newElement->g_pTextSprite->End();
+        newElement->g_pTextSprite->End();*/
+        player.Render();
+
 
         g_pd3dDevice->EndScene();
     }
