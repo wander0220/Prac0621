@@ -8,6 +8,21 @@ Player::Player()
 }
 void Player::Update() 
 {
+    if (inputmanager.keyBuffer[VK_LEFT] == 1)
+        playerX -= 1;
+    if (inputmanager.keyBuffer[VK_RIGHT] == 1)
+        playerX += 1;
+    if (inputmanager.keyBuffer[VK_UP] == 1)
+        playerY -= 1;
+    if (inputmanager.keyBuffer[VK_DOWN] == 1)
+        playerY += 1;
+
+
+    //화면 바깥으로 나가지 말어라...
+    if (playerX < 0) playerX = 0;
+    if (playerX > WINDOW_WIDTH) playerX = WINDOW_WIDTH; if (playerX < 0) playerX = 0;
+    if (playerY < 0) playerY = 0;
+    if (playerY > WINDOW_HEIGHT) playerY = WINDOW_HEIGHT;
 
 }
 void Player::Render()
@@ -21,6 +36,8 @@ void Player::Render()
     rect.right = 64;
     rect.bottom = 64;
 
-    newElement->g_pTextSprite->Draw(newElement->g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
+    D3DXVECTOR3 pos(playerX, playerY, 0);
+
+    newElement->g_pTextSprite->Draw(newElement->g_pTexture, &rect, nullptr, &pos, D3DCOLOR_XRGB(255, 255, 255));
     newElement->g_pTextSprite->End();
 }

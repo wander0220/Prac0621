@@ -60,7 +60,7 @@ void InitMyStuff() {
 }
 
 void EngineUpdate() {
-
+    player.Update();
     inputmanager.Update();
 }
 
