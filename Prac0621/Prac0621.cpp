@@ -18,6 +18,7 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 LPDIRECT3D9             g_pD3D = NULL; 
 LPDIRECT3DDEVICE9       g_pd3dDevice = NULL; 
 LPDIRECT3DTEXTURE9      g_pTexture = NULL;
+ID3DXSprite* g_pTextSprite = NULL;
 
 HRESULT InitD3D(HWND hWnd)
 {
@@ -43,6 +44,10 @@ HRESULT InitD3D(HWND hWnd)
 
     return S_OK;
 }
+void InitMyStuff() {
+    D3DXCreateSprite(g_pd3dDevice, &g_pTextSprite);
+    D3DXCreateTextureFromFile(g_pd3dDevice, L"player/player1.png", &g_pTexture);
+}
 
 VOID Render()
 {
@@ -51,6 +56,17 @@ VOID Render()
 
     if (SUCCEEDED(g_pd3dDevice->BeginScene()))
     {
+        g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+        RECT rect;
+        rect.left = 0;
+        rect.top = 0;
+        rect.right = 64;
+        rect.bottom = 64;
+
+        g_pTextSprite->Draw(g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
+        g_pTextSprite->End();
+
         g_pd3dDevice->EndScene();
     }
     g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
@@ -126,6 +142,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    }
 
    InitD3D(hWnd);
+   InitMyStuff();
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
