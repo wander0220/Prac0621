@@ -23,6 +23,8 @@ TextureManager texturemanager;
 InputManager inputmanager;
 StageManager stagemanager;
 
+bool GameEnd = true;
+
 int iMouseX;
 int iMouseY;
 
@@ -38,9 +40,9 @@ HRESULT InitD3D(HWND hWnd)
     d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 
     d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-    //d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8; 
-    //d3dpp.BackBufferWidth = WINDOW_WIDTH;
-    //d3dpp.BackBufferHeight = WINDOW_HEIGHT;
+    /*d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8; 
+    d3dpp.BackBufferWidth = WINDOW_WIDTH;
+    d3dpp.BackBufferHeight = WINDOW_HEIGHT;*/
 
     d3dpp.EnableAutoDepthStencil = TRUE;
     d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
@@ -68,6 +70,10 @@ void InitMyStuff() {
 }
 
 void EngineUpdate() {
+    if (inputmanager.keyBuffer[VK_ESCAPE] == 0
+        && inputmanager.prevKeyBuffer[VK_ESCAPE] == 1) {
+        GameEnd = false;
+    }
     stagemanager.Update();
     inputmanager.Update();
 }
@@ -121,7 +127,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
-    while (msg.message != WM_QUIT)
+    while (msg.message != WM_QUIT&& GameEnd)
     {
         if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
         {
