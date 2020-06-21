@@ -7,16 +7,16 @@ TitleStage::TitleStage()
 }
 void TitleStage::Update()
 {
-    if (inputmanager.keyBuffer['Z'] == 1
-        && inputmanager.prevKeyBuffer['Z'] == 0) {
-        stagemanager.MakeFirstStage();
+    if (inputmanager.keyBuffer[VK_LBUTTON] == 0
+        && inputmanager.prevKeyBuffer[VK_LBUTTON] == 1) 
+    {
+        if (WINDOW_WIDTH * 0.6 < iMouseX && WINDOW_WIDTH * 0.6 + 256 > iMouseX
+            && WINDOW_HEIGHT * 0.8 < iMouseY && WINDOW_HEIGHT * 0.8 + 64 > iMouseY)
+        {
+            stagemanager.MakeFirstStage();
+        }
     }
 
-    if (WINDOW_WIDTH * 0.6 < iMouseX && WINDOW_WIDTH * 0.6 + 256 > iMouseX
-        && WINDOW_HEIGHT * 0.8 < iMouseY && WINDOW_HEIGHT * 0.8 + 64 > iMouseY)
-    {
-        int a = 10;
-    }
 }
 void TitleStage::Render()
 {
