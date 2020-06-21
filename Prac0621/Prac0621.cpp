@@ -24,6 +24,7 @@ InputManager inputmanager;
 
 //Player player;
 FirstStage firstStage;
+TitleStage titleStage;
 
 HRESULT InitD3D(HWND hWnd)
 {
@@ -59,11 +60,16 @@ HRESULT InitD3D(HWND hWnd)
 void InitMyStuff() {
     texturemanager.LoadTexture(L"player/player1.png", PLAYER_BODY);
     texturemanager.LoadTexture(L"backgrounds/background.png", GAME_BACKGROUND);
+
+    texturemanager.LoadTexture(L"backgrounds/title.png", TITLE_SCREEN);
+    texturemanager.LoadTexture(L"ui/ui_btn_gamestart.png", TITLE_BUTTON);
+
 }
 
 void EngineUpdate() {
     //player.Update();
     firstStage.Update();
+    titleStage.Update();
     inputmanager.Update();
 }
 
@@ -88,6 +94,7 @@ VOID EngineRender()
         //player.Render();
 
         firstStage.Render();
+        titleStage.Render();
 
         g_pd3dDevice->EndScene();
     }
