@@ -27,12 +27,15 @@ HRESULT InitD3D(HWND hWnd)
         return E_FAIL;
     D3DPRESENT_PARAMETERS d3dpp;
     ZeroMemory(&d3dpp, sizeof(d3dpp));
-    d3dpp.Windowed = FALSE; //TRUE;
+    d3dpp.Windowed = TRUE;
+    //d3dpp.Windowed = FALSE; 
+
     d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
 
-    d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8; //D3DFMT_UNKNOWN;
-    d3dpp.BackBufferWidth = 640;
-    d3dpp.BackBufferHeight = 480;
+    d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+    //d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8; 
+    //d3dpp.BackBufferWidth = WINDOW_WIDTH;
+    //d3dpp.BackBufferHeight = WINDOW_HEIGHT;
 
     d3dpp.EnableAutoDepthStencil = TRUE;
     d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
