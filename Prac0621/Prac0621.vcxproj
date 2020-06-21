@@ -160,6 +160,7 @@
     <ClInclude Include="Prac0621.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stage.h" />
+    <ClInclude Include="stage_manager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="texture_manager.h" />
     <ClInclude Include="title_stage.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="game_background.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="Prac0621.cpp" />
+    <ClCompile Include="stage_manager.cpp" />
     <ClCompile Include="texture_manager.cpp" />
     <ClCompile Include="title_stage.cpp" />
   </ItemGroup>

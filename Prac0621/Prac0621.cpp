@@ -23,8 +23,9 @@ TextureManager texturemanager;
 InputManager inputmanager;
 
 //Player player;
-FirstStage firstStage;
-TitleStage titleStage;
+StageManager stagemanager;
+//FirstStage firstStage;
+//TitleStage titleStage;
 
 HRESULT InitD3D(HWND hWnd)
 {
@@ -64,12 +65,13 @@ void InitMyStuff() {
     texturemanager.LoadTexture(L"backgrounds/title.png", TITLE_SCREEN);
     texturemanager.LoadTexture(L"ui/ui_btn_gamestart.png", TITLE_BUTTON);
 
+    stagemanager.MakeTitleStage();
 }
 
 void EngineUpdate() {
     //player.Update();
-    firstStage.Update();
-    titleStage.Update();
+    /*firstStage.Update();*/
+    stagemanager.Update();
     inputmanager.Update();
 }
 
@@ -93,8 +95,8 @@ VOID EngineRender()
         newElement->g_pTextSprite->End();*/
         //player.Render();
 
-        firstStage.Render();
-        titleStage.Render();
+        //firstStage.Render();
+        stagemanager.Render();
 
         g_pd3dDevice->EndScene();
     }
