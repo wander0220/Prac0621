@@ -7,7 +7,10 @@ TitleStage::TitleStage()
 }
 void TitleStage::Update()
 {
-
+    if (inputmanager.keyBuffer['Z'] == 1
+        && inputmanager.prevKeyBuffer['Z'] == 0) {
+        stagemanager.MakeFirstStage();
+    }
 }
 void TitleStage::Render()
 {

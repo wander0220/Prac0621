@@ -21,11 +21,10 @@ LPDIRECT3DDEVICE9       g_pd3dDevice ;
 
 TextureManager texturemanager;
 InputManager inputmanager;
-
-//Player player;
 StageManager stagemanager;
-//FirstStage firstStage;
-//TitleStage titleStage;
+
+int iMouseX;
+int iMouseY;
 
 HRESULT InitD3D(HWND hWnd)
 {
@@ -69,8 +68,6 @@ void InitMyStuff() {
 }
 
 void EngineUpdate() {
-    //player.Update();
-    /*firstStage.Update();*/
     stagemanager.Update();
     inputmanager.Update();
 }
@@ -95,7 +92,6 @@ VOID EngineRender()
         newElement->g_pTextSprite->End();*/
         //player.Render();
 
-        //firstStage.Render();
         stagemanager.Render();
 
         g_pd3dDevice->EndScene();
@@ -196,6 +192,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_LBUTTONUP:
         inputmanager.keyBuffer[VK_LBUTTON] = 0;
+        break;
+    case WM_MOUSEMOVE:
+        iMouseX = (short)LOWORD(lParam);
+        iMouseY = (short)HIWORD(lParam);
         break;
     case WM_PAINT:
         {
