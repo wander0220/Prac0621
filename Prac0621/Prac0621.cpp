@@ -2,7 +2,8 @@
 #include "Prac0621.h"
 
 #include <Windows.h>
-#include <d3dx9.h>
+
+#include "global.h"
 
 #define MAX_LOADSTRING 100
 
@@ -15,10 +16,13 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 
-LPDIRECT3D9             g_pD3D = NULL; 
-LPDIRECT3DDEVICE9       g_pd3dDevice = NULL; 
+LPDIRECT3D9             g_pD3D ; 
+LPDIRECT3DDEVICE9       g_pd3dDevice ; 
+
 LPDIRECT3DTEXTURE9      g_pTexture = NULL;
 ID3DXSprite* g_pTextSprite = NULL;
+
+TextureManager texturemanager;
 
 HRESULT InitD3D(HWND hWnd)
 {
@@ -45,8 +49,9 @@ HRESULT InitD3D(HWND hWnd)
     return S_OK;
 }
 void InitMyStuff() {
-    D3DXCreateSprite(g_pd3dDevice, &g_pTextSprite);
-    D3DXCreateTextureFromFile(g_pd3dDevice, L"player/player1.png", &g_pTexture);
+    //D3DXCreateSprite(g_pd3dDevice, &g_pTextSprite);
+    //D3DXCreateTextureFromFile(g_pd3dDevice, L"player/player1.png", &g_pTexture);
+    texturemanager.LoadTexture(L"player/player1.png", 200);
 }
 
 VOID Render()
@@ -56,7 +61,9 @@ VOID Render()
 
     if (SUCCEEDED(g_pd3dDevice->BeginScene()))
     {
-        g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
+        TextureElements* newElement = texturemanager.GetTexture(200);
+        //g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
+        newElement->g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
         RECT rect;
         rect.left = 0;
@@ -64,8 +71,11 @@ VOID Render()
         rect.right = 64;
         rect.bottom = 64;
 
-        g_pTextSprite->Draw(g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
-        g_pTextSprite->End();
+        //g_pTextSprite->Draw(g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
+        //g_pTextSprite->End();
+
+        newElement->g_pTextSprite->Draw(newElement->g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
+        newElement->g_pTextSprite->End();
 
         g_pd3dDevice->EndScene();
     }
