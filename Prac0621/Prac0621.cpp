@@ -22,7 +22,8 @@ LPDIRECT3DDEVICE9       g_pd3dDevice ;
 TextureManager texturemanager;
 InputManager inputmanager;
 
-Player player;
+//Player player;
+FirstStage firstStage;
 
 HRESULT InitD3D(HWND hWnd)
 {
@@ -57,10 +58,12 @@ HRESULT InitD3D(HWND hWnd)
 }
 void InitMyStuff() {
     texturemanager.LoadTexture(L"player/player1.png", PLAYER_BODY);
+    texturemanager.LoadTexture(L"backgrounds/background.png", GAME_BACKGROUND);
 }
 
 void EngineUpdate() {
-    player.Update();
+    //player.Update();
+    firstStage.Update();
     inputmanager.Update();
 }
 
@@ -82,8 +85,9 @@ VOID EngineRender()
 
         newElement->g_pTextSprite->Draw(newElement->g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
         newElement->g_pTextSprite->End();*/
-        player.Render();
+        //player.Render();
 
+        firstStage.Render();
 
         g_pd3dDevice->EndScene();
     }
