@@ -11,6 +11,12 @@ void TitleStage::Update()
         && inputmanager.prevKeyBuffer['Z'] == 0) {
         stagemanager.MakeFirstStage();
     }
+
+    if (WINDOW_WIDTH * 0.6 < iMouseX && WINDOW_WIDTH * 0.6 + 256 > iMouseX
+        && WINDOW_HEIGHT * 0.8 < iMouseY && WINDOW_HEIGHT * 0.8 + 64 > iMouseY)
+    {
+        int a = 10;
+    }
 }
 void TitleStage::Render()
 {
