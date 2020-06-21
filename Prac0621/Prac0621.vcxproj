@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="input_manager.h" />
     <ClInclude Include="Prac0621.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />

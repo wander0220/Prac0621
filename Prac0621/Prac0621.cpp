@@ -20,6 +20,7 @@ LPDIRECT3D9             g_pD3D ;
 LPDIRECT3DDEVICE9       g_pd3dDevice ; 
 
 TextureManager texturemanager;
+InputManager inputmanager;
 
 HRESULT InitD3D(HWND hWnd)
 {
@@ -56,7 +57,12 @@ void InitMyStuff() {
     texturemanager.LoadTexture(L"player/player1.png", 200);
 }
 
-VOID Render()
+void EngineUpdate() {
+
+    inputmanager.Update();
+}
+
+VOID EngineRender()
 {
     g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER,
         D3DCOLOR_XRGB(0, 0, 255), 1.0f, 0);
@@ -110,7 +116,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
         else {
-            Render();
+            EngineUpdate();
+            EngineRender();
         }
     }
 
@@ -160,6 +167,19 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+
+    case WM_KEYDOWN:
+        inputmanager.keyBuffer[wParam] = 1;
+        break;
+    case WM_KEYUP:
+        inputmanager.keyBuffer[wParam] = 0;
+        break;
+    case WM_LBUTTONDOWN:
+        inputmanager.keyBuffer[VK_LBUTTON] = 1;
+        break;
+    case WM_LBUTTONUP:
+        inputmanager.keyBuffer[VK_LBUTTON] = 0;
+        break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
