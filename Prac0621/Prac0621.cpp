@@ -19,9 +19,6 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 LPDIRECT3D9             g_pD3D ; 
 LPDIRECT3DDEVICE9       g_pd3dDevice ; 
 
-LPDIRECT3DTEXTURE9      g_pTexture = NULL;
-ID3DXSprite* g_pTextSprite = NULL;
-
 TextureManager texturemanager;
 
 HRESULT InitD3D(HWND hWnd)
@@ -30,9 +27,13 @@ HRESULT InitD3D(HWND hWnd)
         return E_FAIL;
     D3DPRESENT_PARAMETERS d3dpp;
     ZeroMemory(&d3dpp, sizeof(d3dpp));
-    d3dpp.Windowed = TRUE;
+    d3dpp.Windowed = FALSE; //TRUE;
     d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-    d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+
+    d3dpp.BackBufferFormat = D3DFMT_A8R8G8B8; //D3DFMT_UNKNOWN;
+    d3dpp.BackBufferWidth = 640;
+    d3dpp.BackBufferHeight = 480;
+
     d3dpp.EnableAutoDepthStencil = TRUE;
     d3dpp.AutoDepthStencilFormat = D3DFMT_D16;
     if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
@@ -49,8 +50,6 @@ HRESULT InitD3D(HWND hWnd)
     return S_OK;
 }
 void InitMyStuff() {
-    //D3DXCreateSprite(g_pd3dDevice, &g_pTextSprite);
-    //D3DXCreateTextureFromFile(g_pd3dDevice, L"player/player1.png", &g_pTexture);
     texturemanager.LoadTexture(L"player/player1.png", 200);
 }
 
@@ -62,7 +61,6 @@ VOID Render()
     if (SUCCEEDED(g_pd3dDevice->BeginScene()))
     {
         TextureElements* newElement = texturemanager.GetTexture(200);
-        //g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
         newElement->g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
         RECT rect;
@@ -70,9 +68,6 @@ VOID Render()
         rect.top = 0;
         rect.right = 64;
         rect.bottom = 64;
-
-        //g_pTextSprite->Draw(g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
-        //g_pTextSprite->End();
 
         newElement->g_pTextSprite->Draw(newElement->g_pTexture, &rect, nullptr, nullptr, D3DCOLOR_XRGB(255, 255, 255));
         newElement->g_pTextSprite->End();
