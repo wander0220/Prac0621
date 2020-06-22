@@ -1,29 +1,23 @@
-#include "title_stage.h"
+#include "menu_stage.h"
 #include "global.h"
-
-TitleStage::TitleStage() 
+MenuStage::MenuStage() 
 {
 
 }
-void TitleStage::Update()
+void MenuStage::Update() 
 {
     if (inputmanager.keyBuffer[VK_LBUTTON] == 0
-        && inputmanager.prevKeyBuffer[VK_LBUTTON] == 1) 
+        && inputmanager.prevKeyBuffer[VK_LBUTTON] == 1)
     {
         if (WINDOW_WIDTH * 0.6 < iMouseX && WINDOW_WIDTH * 0.6 + 256 > iMouseX
             && WINDOW_HEIGHT * 0.8 < iMouseY && WINDOW_HEIGHT * 0.8 + 64 > iMouseY)
         {
-            stagemanager.MakeFirstStage();
-        }
-        if (WINDOW_WIDTH * 0.6 < iMouseX && WINDOW_WIDTH * 0.6 + 256 > iMouseX
-            && WINDOW_HEIGHT * 0.9 < iMouseY && WINDOW_HEIGHT * 0.9 + 64 > iMouseY)
-        {
-            stagemanager.MakeMenuStage();
+            stagemanager.MakeTitleStage();
         }
     }
 
 }
-void TitleStage::Render()
+void MenuStage::Render() 
 {
     TextureElements* newElement = texturemanager.GetTexture(TITLE_SCREEN);
     newElement->g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
@@ -50,19 +44,9 @@ void TitleStage::Render()
     rect2.right = 256;
     rect2.bottom = 64;
 
-    D3DXVECTOR3 pos2(WINDOW_WIDTH*0.6, WINDOW_HEIGHT*0.8, 0);
+    D3DXVECTOR3 pos2(WINDOW_WIDTH * 0.6, WINDOW_HEIGHT * 0.8, 0);
 
     newElement2->g_pTextSprite->Draw(newElement2->g_pTexture, &rect2, nullptr
         , &pos2, D3DCOLOR_XRGB(255, 255, 255));
     newElement2->g_pTextSprite->End();
-
-    //button 2
-    TextureElements* newElement3 = texturemanager.GetTexture(TITLE_BUTTON);
-    newElement3->g_pTextSprite->Begin(D3DXSPRITE_ALPHABLEND);
-
-    D3DXVECTOR3 pos3(WINDOW_WIDTH * 0.6, WINDOW_HEIGHT * 0.9, 0);
-
-    newElement3->g_pTextSprite->Draw(newElement3->g_pTexture, &rect2, nullptr
-        , &pos3, D3DCOLOR_XRGB(255, 255, 255));
-    newElement3->g_pTextSprite->End();
 }

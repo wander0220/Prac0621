@@ -1,6 +1,7 @@
 #include "stage_manager.h"
 #include "first_stage.h"
 #include "title_stage.h"
+#include "menu_stage.h"
 void StageManager::Update() 
 {
 	if (currentStage != nullptr) {
@@ -28,5 +29,13 @@ void StageManager::MakeFirstStage()
 		delete currentStage;
 	}
 	FirstStage* stage = new FirstStage();
+	currentStage = stage;
+}
+void StageManager::MakeMenuStage()
+{
+	if (currentStage != nullptr) {
+		delete currentStage;
+	}
+	MenuStage* stage = new MenuStage();
 	currentStage = stage;
 }

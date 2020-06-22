@@ -9,6 +9,7 @@ public:
 	void Render();
 
 	void MakeTitleStage();
+	void MakeMenuStage();
 	void MakeFirstStage();
 
 };

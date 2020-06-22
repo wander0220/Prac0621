@@ -17,4 +17,7 @@ public:
 	//ID3DXFont* font;
 	//int i;
 
+	/*ID3DXFont* g_pFont;
+	ID3DXSprite* g_pTextSprite;
+	WCHAR* g_strTextBuffer;*/
 };

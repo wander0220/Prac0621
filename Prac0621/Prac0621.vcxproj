@@ -158,6 +158,7 @@
     <ClInclude Include="global.h" />
     <ClInclude Include="input_manager.h" />
     <ClInclude Include="math_util.h" />
+    <ClInclude Include="menu_stage.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="player_bullet_a.h" />
     <ClInclude Include="Prac0621.h" />
@@ -172,6 +173,7 @@
     <ClCompile Include="first_stage.cpp" />
     <ClCompile Include="gamesystem.cpp" />
     <ClCompile Include="game_background.cpp" />
+    <ClCompile Include="menu_stage.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="player_bullet_a.cpp" />
     <ClCompile Include="Prac0621.cpp" />

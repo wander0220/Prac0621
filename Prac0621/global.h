@@ -13,6 +13,10 @@ extern InputManager inputmanager;
 extern StageManager stagemanager;
 extern GameSystem gamesystem;
 
+extern ID3DXFont* g_pFont;
+extern ID3DXSprite* g_pTextSprite;
+extern WCHAR* g_strTextBuffer;
+
 extern int iMouseX ;
 extern int iMouseY;
 
